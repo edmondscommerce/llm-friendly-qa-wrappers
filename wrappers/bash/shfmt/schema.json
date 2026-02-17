@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "shfmt Wrapper Output",
+  "description": "Custom JSON output from shfmt diff parsing. shfmt has no native JSON mode.",
+  "type": "object",
+  "required": ["tool", "version", "timestamp", "exit_code", "command", "summary", "results"],
+  "properties": {
+    "tool": { "const": "shfmt" },
+    "version": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "exit_code": { "type": "integer", "enum": [0, 1] },
+    "command": { "type": "string" },
+    "summary": {
+      "type": "object",
+      "required": ["total_files", "files_with_errors", "error_count", "warning_count"],
+      "properties": {
+        "total_files": { "type": "integer", "minimum": 0 },
+        "files_with_errors": { "type": "integer", "minimum": 0 },
+        "error_count": { "type": "integer", "minimum": 0 },
+        "warning_count": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["file_path", "formatted", "diff_count", "hunks"],
+        "properties": {
+          "file_path": { "type": "string" },
+          "formatted": { "type": "boolean" },
+          "diff_count": { "type": "integer", "minimum": 0 },
+          "hunks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["original_start", "original_count", "formatted_start", "formatted_count"],
+              "properties": {
+                "original_start": { "type": "integer" },
+                "original_count": { "type": "integer" },
+                "formatted_start": { "type": "integer" },
+                "formatted_count": { "type": "integer" }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
