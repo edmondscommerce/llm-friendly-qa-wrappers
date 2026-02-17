@@ -1,0 +1,8 @@
+{
+    "name": "llm-wrappers/php-cs-fixer",
+    "description": "LLM-friendly PHP-CS-Fixer wrapper with terse output and JSON logs",
+    "require": {
+        "php": ">=8.2",
+        "friendsofphp/php-cs-fixer": "^3.0"
+    }
+}
