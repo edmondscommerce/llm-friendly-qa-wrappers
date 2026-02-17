@@ -1,0 +1,30 @@
+{
+  "tool": "pytest",
+  "timestamp": "2026-02-17T10:00:00+00:00",
+  "summary": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "summary_line": "3 passed in 0.01s"
+  },
+  "tests": [
+    {
+      "file_path": "src/test_clean.py",
+      "test_name": "test_addition",
+      "status": "passed"
+    },
+    {
+      "file_path": "src/test_clean.py",
+      "test_name": "test_string",
+      "status": "passed"
+    },
+    {
+      "file_path": "src/test_clean.py",
+      "test_name": "test_list",
+      "status": "passed"
+    }
+  ],
+  "failures": []
+}

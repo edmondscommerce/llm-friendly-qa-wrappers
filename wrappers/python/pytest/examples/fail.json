@@ -1,0 +1,39 @@
+{
+  "tool": "pytest",
+  "timestamp": "2026-02-17T10:00:00+00:00",
+  "summary": {
+    "total": 3,
+    "passed": 1,
+    "failed": 2,
+    "errors": 0,
+    "skipped": 0,
+    "summary_line": "2 failed, 1 passed in 0.01s"
+  },
+  "tests": [
+    {
+      "file_path": "src/test_broken.py",
+      "test_name": "test_bad_math",
+      "status": "failed"
+    },
+    {
+      "file_path": "src/test_broken.py",
+      "test_name": "test_bad_string",
+      "status": "failed"
+    },
+    {
+      "file_path": "src/test_broken.py",
+      "test_name": "test_passes",
+      "status": "passed"
+    }
+  ],
+  "failures": [
+    {
+      "test_name": "test_bad_math",
+      "details": "src/test_broken.py:5: in test_bad_math\n    assert 1 + 1 == 3\nE   assert (1 + 1) == 3"
+    },
+    {
+      "test_name": "test_bad_string",
+      "details": "src/test_broken.py:9: in test_bad_string\n    assert \"hello\" == \"world\"\nE   AssertionError: assert 'hello' == 'world'"
+    }
+  ]
+}

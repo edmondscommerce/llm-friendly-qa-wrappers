@@ -1,0 +1,6 @@
+[project]
+name = "llm-pytest"
+version = "0.1.0"
+description = "Terse pytest wrapper with JSON output"
+requires-python = ">=3.11"
+dependencies = ["pytest>=7.0.0"]
