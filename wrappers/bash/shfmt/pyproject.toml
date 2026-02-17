@@ -1,0 +1,5 @@
+[project]
+name = "llm-shfmt"
+version = "0.1.0"
+description = "shfmt wrapper with terse terminal output and structured JSON details"
+requires-python = ">=3.11"
