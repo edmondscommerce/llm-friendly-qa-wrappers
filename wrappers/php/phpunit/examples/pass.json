@@ -1,0 +1,43 @@
+{
+    "tool": "phpunit",
+    "summary": {
+        "tests": 2,
+        "assertions": 2,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "time": 0.001
+    },
+    "test_suites": [
+        {
+            "name": "CalculatorTest",
+            "file": "/path/to/CalculatorTest.php",
+            "tests": 2,
+            "assertions": 2,
+            "errors": 0,
+            "failures": 0,
+            "skipped": 0,
+            "time": 0.001,
+            "test_cases": [
+                {
+                    "name": "testAdd",
+                    "class": "CalculatorTest",
+                    "file": "/path/to/CalculatorTest.php",
+                    "line": 9,
+                    "assertions": 1,
+                    "time": 0.001,
+                    "status": "passed"
+                },
+                {
+                    "name": "testSubtract",
+                    "class": "CalculatorTest",
+                    "file": "/path/to/CalculatorTest.php",
+                    "line": 15,
+                    "assertions": 1,
+                    "time": 0.0,
+                    "status": "passed"
+                }
+            ]
+        }
+    ]
+}
