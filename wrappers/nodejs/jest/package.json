@@ -1,0 +1,12 @@
+{
+  "name": "llm-jest",
+  "version": "0.1.0",
+  "description": "LLM-friendly Jest wrapper with terse output and JSON logs",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "jest": "^29.0.0"
+  }
+}
