@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ESLint Wrapper Output",
+  "type": "object",
+  "required": ["tool", "version", "timestamp", "exit_code", "command", "summary", "results"],
+  "properties": {
+    "tool": { "const": "eslint" },
+    "version": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "exit_code": { "type": "integer", "enum": [0, 1] },
+    "command": { "type": "string" },
+    "summary": {
+      "type": "object",
+      "required": ["total_files", "files_with_errors", "error_count", "warning_count"],
+      "properties": {
+        "total_files": { "type": "integer", "minimum": 0 },
+        "files_with_errors": { "type": "integer", "minimum": 0 },
+        "error_count": { "type": "integer", "minimum": 0 },
+        "warning_count": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["file_path", "error_count", "warning_count", "errors", "warnings"],
+        "properties": {
+          "file_path": { "type": "string" },
+          "error_count": { "type": "integer", "minimum": 0 },
+          "warning_count": { "type": "integer", "minimum": 0 },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["line", "column", "severity", "rule", "message"],
+              "properties": {
+                "line": { "type": "integer" },
+                "column": { "type": "integer" },
+                "severity": { "const": "error" },
+                "rule": { "type": ["string", "null"] },
+                "message": { "type": "string" }
+              },
+              "additionalProperties": false
+            }
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["line", "column", "severity", "rule", "message"],
+              "properties": {
+                "line": { "type": "integer" },
+                "column": { "type": "integer" },
+                "severity": { "const": "warning" },
+                "rule": { "type": ["string", "null"] },
+                "message": { "type": "string" }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

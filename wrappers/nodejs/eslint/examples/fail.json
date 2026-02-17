@@ -1,0 +1,65 @@
+{
+  "tool": "eslint",
+  "version": "9.39.2",
+  "timestamp": "2026-02-17T14:51:00.605Z",
+  "exit_code": 1,
+  "command": "llm-eslint.js src/",
+  "summary": {
+    "total_files": 1,
+    "files_with_errors": 1,
+    "error_count": 6,
+    "warning_count": 0
+  },
+  "results": [
+    {
+      "file_path": "/workspace/test-fixtures/nodejs/eslint/fail/src/messy.js",
+      "error_count": 6,
+      "warning_count": 0,
+      "errors": [
+        {
+          "line": 1,
+          "column": 1,
+          "severity": "error",
+          "rule": "no-var",
+          "message": "Unexpected var, use let or const instead."
+        },
+        {
+          "line": 1,
+          "column": 5,
+          "severity": "error",
+          "rule": "no-unused-vars",
+          "message": "'unused' is assigned a value but never used."
+        },
+        {
+          "line": 4,
+          "column": 9,
+          "severity": "error",
+          "rule": "eqeqeq",
+          "message": "Expected '===' and instead saw '=='."
+        },
+        {
+          "line": 5,
+          "column": 5,
+          "severity": "error",
+          "rule": "no-undef",
+          "message": "'console' is not defined."
+        },
+        {
+          "line": 7,
+          "column": 3,
+          "severity": "error",
+          "rule": "no-var",
+          "message": "Unexpected var, use let or const instead."
+        },
+        {
+          "line": 7,
+          "column": 7,
+          "severity": "error",
+          "rule": "no-unused-vars",
+          "message": "'another_unused' is assigned a value but never used."
+        }
+      ],
+      "warnings": []
+    }
+  ]
+}

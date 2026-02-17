@@ -1,0 +1,22 @@
+{
+  "tool": "eslint",
+  "version": "9.39.2",
+  "timestamp": "2026-02-17T14:50:59.243Z",
+  "exit_code": 0,
+  "command": "llm-eslint.js src/",
+  "summary": {
+    "total_files": 1,
+    "files_with_errors": 0,
+    "error_count": 0,
+    "warning_count": 0
+  },
+  "results": [
+    {
+      "file_path": "/workspace/test-fixtures/nodejs/eslint/pass/src/clean.js",
+      "error_count": 0,
+      "warning_count": 0,
+      "errors": [],
+      "warnings": []
+    }
+  ]
+}
