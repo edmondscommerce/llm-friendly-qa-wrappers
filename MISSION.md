@@ -20,32 +20,22 @@ Failure: `❌ [Tool]: [Summary] (details: [path])`
 
 ### Detailed JSON Logs
 
-Standard schema across all tools:
+Each tool defines its own JSON schema - no forced standardization across tools.
 
-```json
-{
-  "metadata": {
-    "tool": "eslint",
-    "version": "8.56.0",
-    "timestamp": "2026-02-17T10:30:45Z",
-    "exit_code": 1
-  },
-  "summary": {
-    "error_count": 3,
-    "warning_count": 7,
-    "passed": false
-  },
-  "details": []
-}
-```
+### Tool-Specific Schema
+
+Each wrapper directory contains:
+- **Wrapper script**: Runs the tool and produces output
+- **JSON schema file**: Documents the JSON structure
+- **Example outputs**: Sample JSON files showing real results
 
 ### JQ-Friendly
 
-Semantic keys optimized for queries:
+Design schemas with semantic keys for easy querying:
 
 ```bash
-jq '.summary.error_count' result.json
-jq '.details[] | select(.severity == "error")' result.json
+jq '.error_count' result.json
+jq '.files[] | select(.errors > 0)' result.json
 ```
 
 ## Target Languages
@@ -60,10 +50,24 @@ Future: Python, Ruby, Go, Rust
 - CI/CD integration
 - Scriptable queries
 
+## Wrapper Structure
+
+Each tool wrapper directory contains:
+
+```
+wrappers/nodejs/eslint/
+├── run.sh              # Wrapper script
+├── schema.json         # JSON schema for output
+└── examples/
+    ├── pass.json       # Example passing result
+    └── fail.json       # Example failing result
+```
+
 ## Contributing
 
 Each wrapper must:
-1. Follow the schema
+1. Define its own JSON schema (schema.json)
 2. Produce terse terminal output
-3. Write JSON to temp file
-4. Be jq-friendly
+3. Write JSON to temp file matching schema
+4. Use semantic keys (jq-friendly)
+5. Include example outputs
