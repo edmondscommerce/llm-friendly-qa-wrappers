@@ -1,0 +1,60 @@
+{
+  "tool": "shellcheck",
+  "version": "0.9.0",
+  "timestamp": "2026-02-17T10:30:00+00:00",
+  "exit_code": 1,
+  "command": "shellcheck -f json src/",
+  "summary": {
+    "total_files": 1,
+    "total_issues": 2,
+    "error_count": 0,
+    "warning_count": 1,
+    "info_count": 1,
+    "style_count": 0
+  },
+  "issues": [
+    {
+      "file": "src/deploy.sh",
+      "line": 10,
+      "endLine": 10,
+      "column": 6,
+      "endColumn": 10,
+      "level": "warning",
+      "code": 2154,
+      "message": "name is referenced but not assigned.",
+      "fix": null
+    },
+    {
+      "file": "src/deploy.sh",
+      "line": 10,
+      "endLine": 10,
+      "column": 6,
+      "endColumn": 10,
+      "level": "info",
+      "code": 2086,
+      "message": "Double quote to prevent globbing and word splitting.",
+      "fix": {
+        "replacements": [
+          {
+            "line": 10,
+            "endLine": 10,
+            "column": 6,
+            "endColumn": 6,
+            "precedence": 7,
+            "insertionPoint": "afterEnd",
+            "replacement": "\""
+          },
+          {
+            "line": 10,
+            "endLine": 10,
+            "column": 10,
+            "endColumn": 10,
+            "precedence": 7,
+            "insertionPoint": "beforeStart",
+            "replacement": "\""
+          }
+        ]
+      }
+    }
+  ]
+}
