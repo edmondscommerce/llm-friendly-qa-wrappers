@@ -1,0 +1,22 @@
+{
+    "about": "PHP CS Fixer 3.94.0 7th Gear by Fabien Potencier, Dariusz Ruminski and contributors.",
+    "files": [
+        {
+            "name": "src/messy.php",
+            "appliedFixers": [
+                "single_space_around_construct",
+                "function_declaration",
+                "method_argument_space",
+                "blank_line_after_opening_tag",
+                "constant_case",
+                "braces_position",
+                "statement_indentation"
+            ],
+            "diff": "--- src/messy.php\n+++ src/messy.php\n@@ -1,8 +1,9 @@\n..."
+        }
+    ],
+    "time": {
+        "total": 0.003
+    },
+    "memory": 16
+}
