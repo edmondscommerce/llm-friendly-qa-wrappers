@@ -43,24 +43,75 @@ jq '.files[] | select(.errors > 0)' result.json
 Phase 1: Node.js, PHP
 Future: Python, Ruby, Go, Rust
 
+## Minimum Versions
+
+We support **modern versions only** - no legacy support.
+
+Document minimum versions in each wrapper's package file:
+- Node.js: `package.json` → `"engines": {"node": ">=20.0.0"}`
+- PHP: `composer.json` → `"require": {"php": ">=8.2"}`
+- Python: `pyproject.toml` → `requires-python = ">=3.11"`
+
+## Usage Example
+
+### Node.js (ESLint)
+```bash
+node wrappers/nodejs/eslint/wrapper.js src/
+# ✅ ESLint: 0 errors (details: /tmp/eslint-xyz.json)
+
+jq '.summary.error_count' /tmp/eslint-xyz.json
+```
+
+### PHP (PHPStan)
+```bash
+php wrappers/php/phpstan/wrapper.php src/
+# ❌ PHPStan: 5 errors (details: /tmp/phpstan-xyz.json)
+
+jq '.errors[] | .message' /tmp/phpstan-xyz.json
+```
+
 ## Use Cases
 
 - Quick status checks
 - Automated analysis of QA results
 - CI/CD integration
-- Scriptable queries
+- Scriptable queries with jq
 
 ## Wrapper Structure
+
+Wrappers are written in the **same language as the tool they wrap**.
+
+- Node.js tools (ESLint, Prettier, Jest) → JavaScript/TypeScript wrappers
+- PHP tools (PHPStan, PHP-CS-Fixer) → PHP wrappers
+- Python tools (pytest, ruff, mypy) → Python wrappers
+
+**Why?** Native JSON handling, proper error handling, language-specific features.
+
+**No shell scripts** - Working with JSON in bash/shell is painful.
 
 Each tool wrapper directory contains:
 
 ```
 wrappers/nodejs/eslint/
-├── run.sh              # Wrapper script
+├── wrapper.js          # Main wrapper (NOT bash)
+├── package.json        # Dependencies + minimum Node version
 ├── schema.json         # JSON schema for output
+├── README.md           # Usage documentation
 └── examples/
     ├── pass.json       # Example passing result
     └── fail.json       # Example failing result
+```
+
+Example for PHP:
+```
+wrappers/php/phpstan/
+├── wrapper.php         # Main wrapper
+├── composer.json       # Dependencies + minimum PHP version
+├── schema.json         # JSON schema
+├── README.md           # Usage docs
+└── examples/
+    ├── pass.json
+    └── fail.json
 ```
 
 ## Contributing
