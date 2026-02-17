@@ -1,0 +1,5 @@
+[project]
+name = "llm-shellcheck"
+version = "0.1.0"
+description = "ShellCheck wrapper with terse terminal output and native JSON details"
+requires-python = ">=3.11"
