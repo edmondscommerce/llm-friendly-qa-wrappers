@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MyPy Wrapper Output",
+  "description": "Envelope wrapping MyPy's native -O json output (JSONL collected into array).",
+  "type": "object",
+  "required": ["tool", "timestamp", "command", "summary", "results"],
+  "properties": {
+    "tool": { "type": "string", "const": "mypy" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "command": { "type": "string" },
+    "summary": {
+      "type": "object",
+      "required": ["error_count", "note_count", "files_with_errors"],
+      "properties": {
+        "error_count": { "type": "integer", "minimum": 0 },
+        "note_count": { "type": "integer", "minimum": 0 },
+        "files_with_errors": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["file", "line", "column", "message", "severity"],
+        "properties": {
+          "file": { "type": "string" },
+          "line": { "type": "integer" },
+          "column": { "type": "integer" },
+          "message": { "type": "string" },
+          "hint": { "type": ["string", "null"] },
+          "code": { "type": ["string", "null"] },
+          "severity": { "type": "string", "enum": ["error", "note", "warning"] }
+        }
+      }
+    }
+  }
+}
