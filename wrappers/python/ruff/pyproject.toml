@@ -1,0 +1,6 @@
+[project]
+name = "llm-ruff"
+version = "0.1.0"
+description = "Terse Ruff wrapper with JSON output"
+requires-python = ">=3.11"
+dependencies = ["ruff>=0.4.0"]
