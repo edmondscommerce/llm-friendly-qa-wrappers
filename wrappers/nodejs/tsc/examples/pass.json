@@ -1,0 +1,13 @@
+{
+  "tool": "tsc",
+  "version": "5.9.3",
+  "timestamp": "2026-02-17T19:26:32.445Z",
+  "exit_code": 0,
+  "command": "llm-tsc.js src/",
+  "summary": {
+    "total_errors": 0,
+    "total_warnings": 0,
+    "files_with_errors": 0
+  },
+  "diagnostics": []
+}
