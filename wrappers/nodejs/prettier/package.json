@@ -1,0 +1,12 @@
+{
+  "name": "llm-prettier",
+  "version": "0.1.0",
+  "description": "LLM-friendly Prettier wrapper with terse output and JSON logs",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "prettier": "^3.0.0"
+  }
+}

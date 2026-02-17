@@ -1,0 +1,19 @@
+{
+  "tool": "prettier",
+  "version": "3.8.1",
+  "timestamp": "2026-02-17T14:53:52.205Z",
+  "exit_code": 1,
+  "command": "llm-prettier.js src/",
+  "summary": {
+    "total_files": 1,
+    "files_with_errors": 1,
+    "error_count": 1,
+    "warning_count": 0
+  },
+  "results": [
+    {
+      "file_path": "/workspace/test-fixtures/nodejs/prettier/fail/src/messy.js",
+      "formatted": false
+    }
+  ]
+}
