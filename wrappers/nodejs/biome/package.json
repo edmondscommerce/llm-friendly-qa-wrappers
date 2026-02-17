@@ -1,0 +1,12 @@
+{
+  "name": "llm-biome",
+  "version": "0.1.0",
+  "description": "LLM-friendly Biome wrapper with terse output and JSON logs",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@biomejs/biome": "^1.9.0"
+  }
+}
