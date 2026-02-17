@@ -1,0 +1,8 @@
+{
+    "name": "llm-wrappers/phpunit",
+    "description": "LLM-friendly PHPUnit wrapper with terse output and JSON logs",
+    "require": {
+        "php": ">=8.2",
+        "phpunit/phpunit": "^11.0"
+    }
+}

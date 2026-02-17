@@ -1,0 +1,28 @@
+{
+  "tool": "shfmt",
+  "version": "3.6.0",
+  "timestamp": "2026-02-17T10:30:00+00:00",
+  "exit_code": 1,
+  "command": "shfmt -d src/",
+  "summary": {
+    "total_files": 1,
+    "files_with_errors": 1,
+    "error_count": 1,
+    "warning_count": 0
+  },
+  "results": [
+    {
+      "file_path": "/workspace/test-fixtures/bash/shfmt/fail/src/messy.sh",
+      "formatted": false,
+      "diff_count": 1,
+      "hunks": [
+        {
+          "original_start": 2,
+          "original_count": 12,
+          "formatted_start": 2,
+          "formatted_count": 12
+        }
+      ]
+    }
+  ]
+}

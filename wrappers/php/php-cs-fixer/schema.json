@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "PHP-CS-Fixer Native JSON Output",
+    "description": "Native PHP-CS-Fixer --format=json output. Schema documents the tool's own format.",
+    "type": "object",
+    "required": ["about", "files", "time", "memory"],
+    "properties": {
+        "about": { "type": "string" },
+        "files": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                    "name": { "type": "string" },
+                    "appliedFixers": {
+                        "type": "array",
+                        "items": { "type": "string" }
+                    },
+                    "diff": { "type": "string" }
+                }
+            }
+        },
+        "time": {
+            "type": "object",
+            "required": ["total"],
+            "properties": {
+                "total": { "type": "number" }
+            }
+        },
+        "memory": { "type": "number" }
+    }
+}

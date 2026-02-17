@@ -1,0 +1,8 @@
+{
+    "name": "llm-wrappers/phpstan",
+    "description": "LLM-friendly PHPStan wrapper with terse output and JSON logs",
+    "require": {
+        "php": ">=8.2",
+        "phpstan/phpstan": "^2.0"
+    }
+}
