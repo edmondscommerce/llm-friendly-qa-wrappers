@@ -1,0 +1,53 @@
+{
+  "tool": "ruff",
+  "timestamp": "2026-02-17T10:00:00+00:00",
+  "command": "ruff check --output-format json src/",
+  "summary": {
+    "error_count": 2,
+    "files_with_errors": 1
+  },
+  "results": [
+    {
+      "cell": null,
+      "code": "F401",
+      "end_location": {
+        "column": 10,
+        "row": 1
+      },
+      "filename": "src/messy.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [],
+        "message": "Remove unused import: `os`"
+      },
+      "location": {
+        "column": 8,
+        "row": 1
+      },
+      "message": "`os` imported but unused",
+      "noqa_row": 1,
+      "url": "https://docs.astral.sh/ruff/rules/unused-import"
+    },
+    {
+      "cell": null,
+      "code": "F841",
+      "end_location": {
+        "column": 6,
+        "row": 9
+      },
+      "filename": "src/messy.py",
+      "fix": {
+        "applicability": "unsafe",
+        "edits": [],
+        "message": "Remove assignment to unused variable `a`"
+      },
+      "location": {
+        "column": 5,
+        "row": 9
+      },
+      "message": "Local variable `a` is assigned to but never used",
+      "noqa_row": 9,
+      "url": "https://docs.astral.sh/ruff/rules/unused-variable"
+    }
+  ]
+}

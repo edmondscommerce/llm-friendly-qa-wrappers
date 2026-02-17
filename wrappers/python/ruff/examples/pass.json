@@ -1,0 +1,10 @@
+{
+  "tool": "ruff",
+  "timestamp": "2026-02-17T10:00:00+00:00",
+  "command": "ruff check --output-format json src/",
+  "summary": {
+    "error_count": 0,
+    "files_with_errors": 0
+  },
+  "results": []
+}

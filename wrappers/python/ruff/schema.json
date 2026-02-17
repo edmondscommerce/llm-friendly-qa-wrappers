@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Ruff Wrapper Output",
+  "description": "Envelope wrapping Ruff's native --output-format json output.",
+  "type": "object",
+  "required": ["tool", "timestamp", "command", "summary", "results"],
+  "properties": {
+    "tool": { "type": "string", "const": "ruff" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "command": { "type": "string" },
+    "summary": {
+      "type": "object",
+      "required": ["error_count", "files_with_errors"],
+      "properties": {
+        "error_count": { "type": "integer", "minimum": 0 },
+        "files_with_errors": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "message", "filename", "location", "end_location"],
+        "properties": {
+          "cell": { "type": ["integer", "null"] },
+          "code": { "type": "string" },
+          "message": { "type": "string" },
+          "filename": { "type": "string" },
+          "location": {
+            "type": "object",
+            "required": ["row", "column"],
+            "properties": {
+              "row": { "type": "integer" },
+              "column": { "type": "integer" }
+            }
+          },
+          "end_location": {
+            "type": "object",
+            "required": ["row", "column"],
+            "properties": {
+              "row": { "type": "integer" },
+              "column": { "type": "integer" }
+            }
+          },
+          "fix": {
+            "type": ["object", "null"],
+            "properties": {
+              "applicability": { "type": "string" },
+              "message": { "type": "string" },
+              "edits": { "type": "array" }
+            }
+          },
+          "noqa_row": { "type": ["integer", "null"] },
+          "url": { "type": "string" }
+        }
+      }
+    }
+  }
+}

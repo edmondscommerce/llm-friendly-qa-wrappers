@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "pytest Wrapper Output",
+  "description": "Custom JSON output from pytest wrapper (pytest has no native JSON mode).",
+  "type": "object",
+  "required": ["tool", "timestamp", "summary", "tests"],
+  "properties": {
+    "tool": { "type": "string", "const": "pytest" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "summary": {
+      "type": "object",
+      "required": ["total", "passed", "failed", "errors", "skipped"],
+      "properties": {
+        "total": { "type": "integer", "minimum": 0 },
+        "passed": { "type": "integer", "minimum": 0 },
+        "failed": { "type": "integer", "minimum": 0 },
+        "errors": { "type": "integer", "minimum": 0 },
+        "skipped": { "type": "integer", "minimum": 0 },
+        "summary_line": { "type": "string" }
+      }
+    },
+    "tests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["file_path", "test_name", "status"],
+        "properties": {
+          "file_path": { "type": "string" },
+          "test_name": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["passed", "failed", "error", "skipped"]
+          }
+        }
+      }
+    },
+    "failures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["test_name", "details"],
+        "properties": {
+          "test_name": { "type": "string" },
+          "details": { "type": "string" }
+        }
+      }
+    }
+  }
+}

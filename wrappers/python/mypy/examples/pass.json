@@ -1,0 +1,11 @@
+{
+  "tool": "mypy",
+  "timestamp": "2026-02-17T10:00:00+00:00",
+  "command": "mypy -O json --no-error-summary src/",
+  "summary": {
+    "error_count": 0,
+    "note_count": 0,
+    "files_with_errors": 0
+  },
+  "results": []
+}
