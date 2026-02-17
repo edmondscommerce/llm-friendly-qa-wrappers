@@ -1,0 +1,51 @@
+{
+    "tool": "phpunit",
+    "summary": {
+        "tests": 2,
+        "assertions": 2,
+        "errors": 0,
+        "failures": 2,
+        "skipped": 0,
+        "time": 0.004
+    },
+    "test_suites": [
+        {
+            "name": "CalculatorTest",
+            "file": "/path/to/CalculatorTest.php",
+            "tests": 2,
+            "assertions": 2,
+            "errors": 0,
+            "failures": 2,
+            "skipped": 0,
+            "time": 0.004,
+            "test_cases": [
+                {
+                    "name": "testAdd",
+                    "class": "CalculatorTest",
+                    "file": "/path/to/CalculatorTest.php",
+                    "line": 9,
+                    "assertions": 1,
+                    "time": 0.004,
+                    "status": "failed",
+                    "failure": {
+                        "type": "PHPUnit\\Framework\\ExpectationFailedException",
+                        "message": "CalculatorTest::testAdd\nFailed asserting that 0 is identical to 4."
+                    }
+                },
+                {
+                    "name": "testSubtract",
+                    "class": "CalculatorTest",
+                    "file": "/path/to/CalculatorTest.php",
+                    "line": 15,
+                    "assertions": 1,
+                    "time": 0.0,
+                    "status": "failed",
+                    "failure": {
+                        "type": "PHPUnit\\Framework\\ExpectationFailedException",
+                        "message": "CalculatorTest::testSubtract\nFailed asserting that 4 is identical to 0."
+                    }
+                }
+            ]
+        }
+    ]
+}
