@@ -6,7 +6,10 @@ Validates that a wrapper:
 1. Produces correct exit codes (0=pass, 1=fail, 2=error)
 2. Outputs terse terminal text matching expected format
 3. Writes JSON to a temp file that validates against schema.json
-4. JSON contains expected data (e.g., error counts for fail fixtures)
+
+The harness is format-agnostic - it does NOT assume any particular JSON
+structure. Tools with native JSON output will have their own format.
+Schema validation is the single source of truth for JSON correctness.
 
 Usage:
     python run_acceptance.py <wrapper_dir> <fixture_dir>
@@ -56,43 +59,33 @@ def find_json_path(output: str) -> str | None:
     return match.group(1) if match else None
 
 
-def run_wrapper(
-    wrapper_cmd: list[str], fixture_dir: Path, target: str, cwd: Path
-) -> tuple[int, str, str]:
-    """Run a wrapper and return (exit_code, stdout, stderr)."""
-    result = subprocess.run(
-        wrapper_cmd + [target],
-        capture_output=True,
-        text=True,
-        cwd=str(cwd),
-        timeout=30,
-    )
-    return result.returncode, result.stdout, result.stderr
-
-
 def test_pass_fixture(
     wrapper_cmd: list[str], fixture_dir: Path, schema: dict
 ) -> AcceptanceResult:
     """Test wrapper against passing fixture."""
     result = AcceptanceResult("Pass Fixture")
 
-    exit_code, stdout, stderr = run_wrapper(
-        wrapper_cmd, fixture_dir, "src/", fixture_dir
+    proc = subprocess.run(
+        wrapper_cmd + ["src/"],
+        capture_output=True,
+        text=True,
+        cwd=str(fixture_dir),
+        timeout=30,
     )
+    combined = proc.stdout + proc.stderr
 
     # Exit code should be 0
-    result.check("Exit code is 0", exit_code == 0, f"got {exit_code}")
+    result.check("Exit code is 0", proc.returncode == 0, f"got {proc.returncode}")
 
-    # Output should start with checkmark
-    combined = stdout + stderr
+    # Output should contain success marker
     result.check(
         "Output contains success marker",
-        "✅" in combined,
+        "\u2705" in combined,
         repr(combined[:100]),
     )
 
     # Should be single line (terse)
-    output_lines = [l for l in combined.strip().split("\n") if l.strip()]
+    output_lines = [line for line in combined.strip().split("\n") if line.strip()]
     result.check(
         "Output is terse (1 line)", len(output_lines) == 1, f"got {len(output_lines)} lines"
     )
@@ -111,11 +104,11 @@ def test_pass_fixture(
         except jsonschema.ValidationError as e:
             result.check("JSON validates against schema", False, str(e.message)[:100])
 
-        result.check(
-            "error_count is 0",
-            data.get("summary", {}).get("error_count") == 0,
-            f"got {data.get('summary', {}).get('error_count')}",
+        # Verify it's valid JSON (non-empty)
+        is_non_empty = (isinstance(data, list) and len(data) > 0) or (
+            isinstance(data, dict) and len(data) > 0
         )
+        result.check("JSON output is non-empty", is_non_empty)
     elif json_path:
         result.check("JSON file exists", False, f"{json_path} not found")
 
@@ -128,23 +121,27 @@ def test_fail_fixture(
     """Test wrapper against failing fixture."""
     result = AcceptanceResult("Fail Fixture")
 
-    exit_code, stdout, stderr = run_wrapper(
-        wrapper_cmd, fixture_dir, "src/", fixture_dir
+    proc = subprocess.run(
+        wrapper_cmd + ["src/"],
+        capture_output=True,
+        text=True,
+        cwd=str(fixture_dir),
+        timeout=30,
     )
+    combined = proc.stdout + proc.stderr
 
     # Exit code should be 1
-    result.check("Exit code is 1", exit_code == 1, f"got {exit_code}")
+    result.check("Exit code is 1", proc.returncode == 1, f"got {proc.returncode}")
 
-    # Output should start with X mark
-    combined = stdout + stderr
+    # Output should contain failure marker
     result.check(
         "Output contains failure marker",
-        "❌" in combined,
+        "\u274c" in combined,
         repr(combined[:100]),
     )
 
     # Should be 2-5 lines (terse but informative)
-    output_lines = [l for l in combined.strip().split("\n") if l.strip()]
+    output_lines = [line for line in combined.strip().split("\n") if line.strip()]
     result.check(
         "Output is terse (2-5 lines)",
         2 <= len(output_lines) <= 5,
@@ -165,19 +162,11 @@ def test_fail_fixture(
         except jsonschema.ValidationError as e:
             result.check("JSON validates against schema", False, str(e.message)[:100])
 
-        result.check(
-            "error_count > 0",
-            data.get("summary", {}).get("error_count", 0) > 0,
-            f"got {data.get('summary', {}).get('error_count')}",
+        # Verify it's valid JSON (non-empty)
+        is_non_empty = (isinstance(data, list) and len(data) > 0) or (
+            isinstance(data, dict) and len(data) > 0
         )
-
-        # Verify jq-style queries work (check structure)
-        results_list = data.get("results", [])
-        result.check(
-            "results array is populated",
-            len(results_list) > 0,
-            f"got {len(results_list)} entries",
-        )
+        result.check("JSON output is non-empty", is_non_empty)
     elif json_path:
         result.check("JSON file exists", False, f"{json_path} not found")
 
@@ -188,8 +177,6 @@ def test_no_args(wrapper_cmd: list[str], wrapper_dir: Path) -> AcceptanceResult:
     """Test wrapper with no arguments (should exit 2)."""
     result = AcceptanceResult("No Args (Error Case)")
 
-    exit_code, stdout, stderr = run_wrapper(wrapper_cmd, wrapper_dir, "", wrapper_dir)
-    # Oops, we passed empty string. Let's fix - run with no extra args
     proc = subprocess.run(
         wrapper_cmd,
         capture_output=True,
@@ -197,11 +184,10 @@ def test_no_args(wrapper_cmd: list[str], wrapper_dir: Path) -> AcceptanceResult:
         cwd=str(wrapper_dir),
         timeout=30,
     )
-    exit_code = proc.returncode
     combined = proc.stdout + proc.stderr
 
-    result.check("Exit code is 2", exit_code == 2, f"got {exit_code}")
-    result.check("Output contains error marker", "❌" in combined, repr(combined[:100]))
+    result.check("Exit code is 2", proc.returncode == 2, f"got {proc.returncode}")
+    result.check("Output contains error marker", "\u274c" in combined, repr(combined[:100]))
 
     return result
 

@@ -18,6 +18,17 @@ Success: `✅ [Tool]: [Summary] (details: [path])`
 
 Failure: `❌ [Tool]: [Summary] (details: [path])`
 
+### Native JSON First
+
+**If a tool has a native JSON output mode, always use it.** Never reinvent the wheel by manually constructing JSON from a programmatic API when the tool already provides structured output. Native JSON is:
+- The most accurate representation of the tool's results
+- The easiest to maintain (no custom serialization code to break)
+- The most complete (includes fields you might not think to add)
+
+The wrapper's job in this case is simply: run the tool with its JSON flag, save the output, and print a terse summary. The `schema.json` documents the tool's native format rather than inventing a new one.
+
+Only build custom JSON output when a tool has **no** native JSON mode (e.g., Prettier).
+
 ### Detailed JSON Logs
 
 Each tool defines its own JSON schema - no forced standardization across tools.

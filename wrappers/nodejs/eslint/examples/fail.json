@@ -1,65 +1,128 @@
-{
-  "tool": "eslint",
-  "version": "9.39.2",
-  "timestamp": "2026-02-17T14:51:00.605Z",
-  "exit_code": 1,
-  "command": "llm-eslint.js src/",
-  "summary": {
-    "total_files": 1,
-    "files_with_errors": 1,
-    "error_count": 6,
-    "warning_count": 0
-  },
-  "results": [
-    {
-      "file_path": "/workspace/test-fixtures/nodejs/eslint/fail/src/messy.js",
-      "error_count": 6,
-      "warning_count": 0,
-      "errors": [
-        {
-          "line": 1,
-          "column": 1,
-          "severity": "error",
-          "rule": "no-var",
-          "message": "Unexpected var, use let or const instead."
-        },
-        {
-          "line": 1,
-          "column": 5,
-          "severity": "error",
-          "rule": "no-unused-vars",
-          "message": "'unused' is assigned a value but never used."
-        },
-        {
-          "line": 4,
-          "column": 9,
-          "severity": "error",
-          "rule": "eqeqeq",
-          "message": "Expected '===' and instead saw '=='."
-        },
-        {
-          "line": 5,
-          "column": 5,
-          "severity": "error",
-          "rule": "no-undef",
-          "message": "'console' is not defined."
-        },
-        {
-          "line": 7,
-          "column": 3,
-          "severity": "error",
-          "rule": "no-var",
-          "message": "Unexpected var, use let or const instead."
-        },
-        {
-          "line": 7,
-          "column": 7,
-          "severity": "error",
-          "rule": "no-unused-vars",
-          "message": "'another_unused' is assigned a value but never used."
+[
+  {
+    "filePath": "/workspace/test-fixtures/nodejs/eslint/fail/src/messy.js",
+    "messages": [
+      {
+        "ruleId": "no-var",
+        "severity": 2,
+        "message": "Unexpected var, use let or const instead.",
+        "line": 1,
+        "column": 1,
+        "nodeType": "VariableDeclaration",
+        "messageId": "unexpectedVar",
+        "endLine": 1,
+        "endColumn": 35,
+        "fix": {
+          "range": [
+            0,
+            3
+          ],
+          "text": "let"
         }
-      ],
-      "warnings": []
-    }
-  ]
-}
+      },
+      {
+        "ruleId": "no-unused-vars",
+        "severity": 2,
+        "message": "'unused' is assigned a value but never used.",
+        "line": 1,
+        "column": 5,
+        "nodeType": "Identifier",
+        "messageId": "unusedVar",
+        "endLine": 1,
+        "endColumn": 11,
+        "suggestions": [
+          {
+            "messageId": "removeVar",
+            "data": {
+              "varName": "unused"
+            },
+            "fix": {
+              "range": [
+                0,
+                34
+              ],
+              "text": ""
+            },
+            "desc": "Remove unused variable 'unused'."
+          }
+        ]
+      },
+      {
+        "ruleId": "eqeqeq",
+        "severity": 2,
+        "message": "Expected '===' and instead saw '=='.",
+        "line": 4,
+        "column": 9,
+        "nodeType": "BinaryExpression",
+        "messageId": "unexpected",
+        "endLine": 4,
+        "endColumn": 11,
+        "suggestions": [
+          {
+            "messageId": "replaceOperator",
+            "data": {
+              "expectedOperator": "===",
+              "actualOperator": "=="
+            },
+            "fix": {
+              "range": [
+                66,
+                68
+              ],
+              "text": "==="
+            },
+            "desc": "Use '===' instead of '=='."
+          }
+        ]
+      },
+      {
+        "ruleId": "no-undef",
+        "severity": 2,
+        "message": "'console' is not defined.",
+        "line": 5,
+        "column": 5,
+        "nodeType": "Identifier",
+        "messageId": "undef",
+        "endLine": 5,
+        "endColumn": 12
+      },
+      {
+        "ruleId": "no-var",
+        "severity": 2,
+        "message": "Unexpected var, use let or const instead.",
+        "line": 7,
+        "column": 3,
+        "nodeType": "VariableDeclaration",
+        "messageId": "unexpectedVar",
+        "endLine": 7,
+        "endColumn": 27,
+        "fix": {
+          "range": [
+            105,
+            108
+          ],
+          "text": "let"
+        }
+      },
+      {
+        "ruleId": "no-unused-vars",
+        "severity": 2,
+        "message": "'another_unused' is assigned a value but never used.",
+        "line": 7,
+        "column": 7,
+        "nodeType": "Identifier",
+        "messageId": "unusedVar",
+        "endLine": 7,
+        "endColumn": 21
+      }
+    ],
+    "suppressedMessages": [],
+    "errorCount": 6,
+    "fatalErrorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 2,
+    "fixableWarningCount": 0,
+    "source": "var unused = \"this is never used\";\n\nfunction doStuff(x) {\n  if (x == 5) {\n    console.log(\"five\");\n  }\n  var another_unused = 42;\n  return x;\n}\n\ndoStuff(1);\n",
+    "usedDeprecatedRules": []
+  }
+]

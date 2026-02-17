@@ -1,68 +1,41 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "ESLint Wrapper Output",
-  "type": "object",
-  "required": ["tool", "version", "timestamp", "exit_code", "command", "summary", "results"],
-  "properties": {
-    "tool": { "const": "eslint" },
-    "version": { "type": "string" },
-    "timestamp": { "type": "string", "format": "date-time" },
-    "exit_code": { "type": "integer", "enum": [0, 1] },
-    "command": { "type": "string" },
-    "summary": {
-      "type": "object",
-      "required": ["total_files", "files_with_errors", "error_count", "warning_count"],
-      "properties": {
-        "total_files": { "type": "integer", "minimum": 0 },
-        "files_with_errors": { "type": "integer", "minimum": 0 },
-        "error_count": { "type": "integer", "minimum": 0 },
-        "warning_count": { "type": "integer", "minimum": 0 }
-      },
-      "additionalProperties": false
-    },
-    "results": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "required": ["file_path", "error_count", "warning_count", "errors", "warnings"],
-        "properties": {
-          "file_path": { "type": "string" },
-          "error_count": { "type": "integer", "minimum": 0 },
-          "warning_count": { "type": "integer", "minimum": 0 },
-          "errors": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "required": ["line", "column", "severity", "rule", "message"],
-              "properties": {
-                "line": { "type": "integer" },
-                "column": { "type": "integer" },
-                "severity": { "const": "error" },
-                "rule": { "type": ["string", "null"] },
-                "message": { "type": "string" }
-              },
-              "additionalProperties": false
-            }
-          },
-          "warnings": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "required": ["line", "column", "severity", "rule", "message"],
-              "properties": {
-                "line": { "type": "integer" },
-                "column": { "type": "integer" },
-                "severity": { "const": "warning" },
-                "rule": { "type": ["string", "null"] },
-                "message": { "type": "string" }
-              },
-              "additionalProperties": false
-            }
+  "title": "ESLint Native JSON Output",
+  "description": "Native ESLint --format json output. Schema documents the tool's own format.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["filePath", "messages", "errorCount", "warningCount"],
+    "properties": {
+      "filePath": { "type": "string" },
+      "messages": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["severity", "message", "line", "column"],
+          "properties": {
+            "ruleId": { "type": ["string", "null"] },
+            "severity": { "type": "integer", "enum": [1, 2] },
+            "message": { "type": "string" },
+            "messageId": { "type": "string" },
+            "line": { "type": "integer" },
+            "column": { "type": "integer" },
+            "endLine": { "type": "integer" },
+            "endColumn": { "type": "integer" },
+            "nodeType": { "type": ["string", "null"] },
+            "fix": { "type": "object" },
+            "suggestions": { "type": "array" }
           }
-        },
-        "additionalProperties": false
-      }
+        }
+      },
+      "suppressedMessages": { "type": "array" },
+      "errorCount": { "type": "integer", "minimum": 0 },
+      "fatalErrorCount": { "type": "integer", "minimum": 0 },
+      "warningCount": { "type": "integer", "minimum": 0 },
+      "fixableErrorCount": { "type": "integer", "minimum": 0 },
+      "fixableWarningCount": { "type": "integer", "minimum": 0 },
+      "source": { "type": "string" },
+      "usedDeprecatedRules": { "type": "array" }
     }
-  },
-  "additionalProperties": false
+  }
 }
