@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Vitest Native JSON Output",
+  "description": "Native Vitest --reporter=json output. Schema documents the tool's own format.",
+  "type": "object",
+  "required": ["success", "numTotalTests", "numPassedTests", "numFailedTests", "testResults"],
+  "properties": {
+    "success": { "type": "boolean" },
+    "numTotalTestSuites": { "type": "integer", "minimum": 0 },
+    "numPassedTestSuites": { "type": "integer", "minimum": 0 },
+    "numFailedTestSuites": { "type": "integer", "minimum": 0 },
+    "numTotalTests": { "type": "integer", "minimum": 0 },
+    "numPassedTests": { "type": "integer", "minimum": 0 },
+    "numFailedTests": { "type": "integer", "minimum": 0 },
+    "numPendingTests": { "type": "integer", "minimum": 0 },
+    "startTime": { "type": "number" },
+    "testResults": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["assertionResults", "status"],
+        "properties": {
+          "name": { "type": "string" },
+          "status": { "type": "string" },
+          "startTime": { "type": "number" },
+          "endTime": { "type": "number" },
+          "message": { "type": "string" },
+          "assertionResults": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ancestorTitles": { "type": "array", "items": { "type": "string" } },
+                "fullName": { "type": "string" },
+                "status": { "type": "string" },
+                "title": { "type": "string" },
+                "duration": { "type": ["number", "null"] },
+                "failureMessages": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "llm-vitest",
+  "version": "0.1.0",
+  "description": "LLM-friendly Vitest wrapper with terse output and JSON logs",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "vitest": "^3.0.0"
+  }
+}
