@@ -1,0 +1,82 @@
+{
+  "numFailedTestSuites": 1,
+  "numFailedTests": 1,
+  "numPassedTestSuites": 0,
+  "numPassedTests": 1,
+  "numPendingTestSuites": 0,
+  "numPendingTests": 0,
+  "numRuntimeErrorTestSuites": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 1,
+  "numTotalTests": 2,
+  "openHandles": [],
+  "snapshot": {
+    "added": 0,
+    "didUpdate": false,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0
+  },
+  "startTime": 1771356387538,
+  "success": false,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "adds 1 + 2 to equal 3",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "adds 1 + 2 to equal 3"
+        },
+        {
+          "ancestorTitles": [],
+          "duration": 1,
+          "failureDetails": [
+            {
+              "matcherResult": {
+                "actual": 3,
+                "expected": 99,
+                "message": "\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m99\u001b[39m\nReceived: \u001b[31m3\u001b[39m",
+                "name": "toBe",
+                "pass": false
+              }
+            }
+          ],
+          "failureMessages": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m99\u001b[39m\nReceived: \u001b[31m3\u001b[39m\n    at Object.toBe (/workspace/test-fixtures/nodejs/jest/fail/src/math.test.js:10:21)\n    at Promise.then.completed (/workspace/wrappers/nodejs/jest/node_modules/jest-circus/build/utils.js:298:28)\n    at new Promise (<anonymous>)\n    at callAsyncCircusFn (/workspace/wrappers/nodejs/jest/node_modules/jest-circus/build/utils.js:231:10)\n    at _callCircusTest (/workspace/wrappers/nodejs/jest/node_modules/jest-circus/build/run.js:316:40)\n    at _runTest (/workspace/wrappers/nodejs/jest/node_modules/jest-circus/build/run.js:252:3)\n    at _runTestsForDescribeBlock (/workspace/wrappers/nodejs/jest/node_modules/jest-circus/build/run.js:126:9)\n    at run (/workspace/wrappers/nodejs/jest/node_modules/jest-circus/build/run.js:71:3)\n    at runAndTransformResultsToJestFormat (/workspace/wrappers/nodejs/jest/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)\n    at jestAdapter (/workspace/wrappers/nodejs/jest/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)\n    at runTestInternal (/workspace/wrappers/nodejs/jest/node_modules/jest-runner/build/runTest.js:367:16)\n    at runTest (/workspace/wrappers/nodejs/jest/node_modules/jest-runner/build/runTest.js:444:34)"
+          ],
+          "fullName": "intentionally failing test",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 0,
+          "retryReasons": [],
+          "status": "failed",
+          "title": "intentionally failing test"
+        }
+      ],
+      "endTime": 1771356387651,
+      "message": "\u001b[1m\u001b[31m  \u001b[1m● \u001b[22m\u001b[1mintentionally failing test\u001b[39m\u001b[22m\n\n    \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\n    Expected: \u001b[32m99\u001b[39m\n    Received: \u001b[31m3\u001b[39m\n\u001b[2m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m  8 |\u001b[39m\u001b[22m\n\u001b[2m     \u001b[90m  9 |\u001b[39m test(\u001b[32m\"intentionally failing test\"\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[22m\n\u001b[2m    \u001b[31m\u001b[1m>\u001b[22m\u001b[2m\u001b[39m\u001b[90m 10 |\u001b[39m   expect(add(\u001b[35m1\u001b[39m\u001b[33m,\u001b[39m \u001b[35m2\u001b[39m))\u001b[33m.\u001b[39mtoBe(\u001b[35m99\u001b[39m)\u001b[33m;\u001b[39m\u001b[22m\n\u001b[2m     \u001b[90m    |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[2m\u001b[39m\u001b[22m\n\u001b[2m     \u001b[90m 11 |\u001b[39m })\u001b[33m;\u001b[39m\u001b[22m\n\u001b[2m     \u001b[90m 12 |\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.toBe (\u001b[22m\u001b[2m\u001b[0m\u001b[36msrc/math.test.js\u001b[39m\u001b[0m\u001b[2m:10:21)\u001b[22m\u001b[2m\u001b[22m\n",
+      "name": "/workspace/test-fixtures/nodejs/jest/fail/src/math.test.js",
+      "startTime": 1771356387550,
+      "status": "failed",
+      "summary": ""
+    }
+  ],
+  "wasInterrupted": false
+}
