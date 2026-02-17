@@ -1,0 +1,32 @@
+{
+    "totals": {
+        "errors": 0,
+        "file_errors": 3
+    },
+    "files": {
+        "/path/to/src/messy.php": {
+            "errors": 3,
+            "messages": [
+                {
+                    "message": "Function add() should return string but returns int.",
+                    "line": 5,
+                    "ignorable": true,
+                    "identifier": "return.type"
+                },
+                {
+                    "message": "Parameter #2 $b of function add expects int, string given.",
+                    "line": 8,
+                    "ignorable": true,
+                    "identifier": "argument.type"
+                },
+                {
+                    "message": "Variable $undefined_variable might not be defined.",
+                    "line": 9,
+                    "ignorable": true,
+                    "identifier": "variable.undefined"
+                }
+            ]
+        }
+    },
+    "errors": []
+}

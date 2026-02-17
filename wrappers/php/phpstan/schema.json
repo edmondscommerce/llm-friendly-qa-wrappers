@@ -1,0 +1,45 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "PHPStan Native JSON Output",
+    "description": "Native PHPStan --error-format=json output. Schema documents the tool's own format.",
+    "type": "object",
+    "required": ["totals", "files", "errors"],
+    "properties": {
+        "totals": {
+            "type": "object",
+            "required": ["errors", "file_errors"],
+            "properties": {
+                "errors": { "type": "integer", "minimum": 0 },
+                "file_errors": { "type": "integer", "minimum": 0 }
+            }
+        },
+        "files": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "object",
+                "required": ["errors", "messages"],
+                "properties": {
+                    "errors": { "type": "integer", "minimum": 0 },
+                    "messages": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "required": ["message", "line", "ignorable"],
+                            "properties": {
+                                "message": { "type": "string" },
+                                "line": { "type": "integer" },
+                                "ignorable": { "type": "boolean" },
+                                "identifier": { "type": "string" },
+                                "tip": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "errors": {
+            "type": "array",
+            "items": { "type": "string" }
+        }
+    }
+}
