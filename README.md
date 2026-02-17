@@ -25,12 +25,21 @@ wrappers/
 
 ```bash
 # Run wrapper in native language (NOT shell)
-node wrappers/nodejs/eslint/wrapper.js src/
+node wrappers/nodejs/eslint/llm-eslint.js src/
 # ✅ ESLint: 0 errors (details: /tmp/eslint-xyz.json)
 
 # Query structured results
 jq '.summary.error_count' /tmp/eslint-xyz.json
 ```
+
+## Naming Convention
+
+All wrappers follow the pattern: **`llm-{toolname}.{ext}`**
+
+Examples:
+- `llm-eslint.js` (Node.js)
+- `llm-phpstan.php` (PHP)
+- `llm-pytest.py` (Python)
 
 ## Implementation
 

@@ -11,19 +11,40 @@ Wrappers **must** be written in the same language as the tool they wrap:
 - ✅ pytest wrapper in Python
 - ❌ Any wrapper in bash/shell (JSON handling is too painful)
 
+### Naming Convention
+
+All wrapper files follow the pattern: **`llm-{toolname}.{ext}`**
+
+Examples:
+- Node.js: `llm-eslint.js`, `llm-prettier.js`, `llm-jest.js`
+- PHP: `llm-phpstan.php`, `llm-php-cs-fixer.php`
+- Python: `llm-ruff.py`, `llm-pytest.py`, `llm-mypy.py`
+
 ### Directory Structure
 
 Each wrapper must include:
 
 ```
 wrappers/{language}/{tool}/
-├── wrapper.{ext}       # Main wrapper (js, php, py, etc.)
+├── llm-{tool}.{ext}    # Main wrapper file
 ├── package.json        # Language package file (package.json, composer.json, pyproject.toml)
 ├── schema.json         # JSON schema for output
 ├── README.md           # Usage documentation
 └── examples/
     ├── pass.json       # Example successful run
     └── fail.json       # Example failed run
+```
+
+**Example for ESLint:**
+```
+wrappers/nodejs/eslint/
+├── llm-eslint.js
+├── package.json
+├── schema.json
+├── README.md
+└── examples/
+    ├── pass.json
+    └── fail.json
 ```
 
 ### Minimum Version Requirements
@@ -168,6 +189,7 @@ Before submitting:
 
 ### Pull Request Checklist
 
+- [ ] Wrapper file named `llm-{toolname}.{ext}`
 - [ ] Wrapper written in same language as tool
 - [ ] Minimum version documented in package file
 - [ ] `schema.json` present and valid

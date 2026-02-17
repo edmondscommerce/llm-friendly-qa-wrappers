@@ -56,7 +56,7 @@ Document minimum versions in each wrapper's package file:
 
 ### Node.js (ESLint)
 ```bash
-node wrappers/nodejs/eslint/wrapper.js src/
+node wrappers/nodejs/eslint/llm-eslint.js src/
 # ✅ ESLint: 0 errors (details: /tmp/eslint-xyz.json)
 
 jq '.summary.error_count' /tmp/eslint-xyz.json
@@ -64,7 +64,7 @@ jq '.summary.error_count' /tmp/eslint-xyz.json
 
 ### PHP (PHPStan)
 ```bash
-php wrappers/php/phpstan/wrapper.php src/
+php wrappers/php/phpstan/llm-phpstan.php src/
 # ❌ PHPStan: 5 errors (details: /tmp/phpstan-xyz.json)
 
 jq '.errors[] | .message' /tmp/phpstan-xyz.json
@@ -93,7 +93,7 @@ Each tool wrapper directory contains:
 
 ```
 wrappers/nodejs/eslint/
-├── wrapper.js          # Main wrapper (NOT bash)
+├── llm-eslint.js       # Main wrapper (NOT bash)
 ├── package.json        # Dependencies + minimum Node version
 ├── schema.json         # JSON schema for output
 ├── README.md           # Usage documentation
@@ -105,7 +105,7 @@ wrappers/nodejs/eslint/
 Example for PHP:
 ```
 wrappers/php/phpstan/
-├── wrapper.php         # Main wrapper
+├── llm-phpstan.php     # Main wrapper
 ├── composer.json       # Dependencies + minimum PHP version
 ├── schema.json         # JSON schema
 ├── README.md           # Usage docs
@@ -113,6 +113,11 @@ wrappers/php/phpstan/
     ├── pass.json
     └── fail.json
 ```
+
+**Naming Convention:** `llm-{toolname}.{ext}`
+- Node.js: `llm-eslint.js`, `llm-prettier.js`, `llm-jest.js`
+- PHP: `llm-phpstan.php`, `llm-php-cs-fixer.php`
+- Python: `llm-ruff.py`, `llm-pytest.py`, `llm-mypy.py`
 
 ## Contributing
 
