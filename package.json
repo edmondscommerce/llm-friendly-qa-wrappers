@@ -1,6 +1,6 @@
 {
   "name": "llm-friendly-qa-wrappers",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Standardized wrappers for QA tools with terse terminal output and detailed JSON logs",
   "license": "MIT",
   "repository": {

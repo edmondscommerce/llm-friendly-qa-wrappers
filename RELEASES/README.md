@@ -4,4 +4,6 @@ Release notes for each version of QA Tool Wrappers.
 
 ## Releases
 
-_No releases yet. First release will be v0.1.0._
+| Version | Date | Description |
+|---------|------|-------------|
+| [v0.1.0](v0.1.0.md) | 2026-02-17 | Initial release - 14 wrappers across 4 languages |

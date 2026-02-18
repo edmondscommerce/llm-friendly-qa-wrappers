@@ -72,20 +72,22 @@ def test_pass_fixture(
         cwd=str(fixture_dir),
         timeout=30,
     )
+    # Use stdout for output checks; stderr may contain runtime warnings
+    output = proc.stdout
     combined = proc.stdout + proc.stderr
 
     # Exit code should be 0
     result.check("Exit code is 0", proc.returncode == 0, f"got {proc.returncode}")
 
-    # Output should contain success marker
+    # Output should contain success marker (check both streams)
     result.check(
         "Output contains success marker",
         "\u2705" in combined,
         repr(combined[:100]),
     )
 
-    # Should be single line (terse)
-    output_lines = [line for line in combined.strip().split("\n") if line.strip()]
+    # Should be single line (terse) - only count wrapper's own output lines
+    output_lines = [line for line in output.strip().split("\n") if line.strip()]
     result.check(
         "Output is terse (1 line)", len(output_lines) == 1, f"got {len(output_lines)} lines"
     )
@@ -128,20 +130,22 @@ def test_fail_fixture(
         cwd=str(fixture_dir),
         timeout=30,
     )
+    # Use stdout for output checks; stderr may contain runtime warnings
+    output = proc.stdout
     combined = proc.stdout + proc.stderr
 
     # Exit code should be 1
     result.check("Exit code is 1", proc.returncode == 1, f"got {proc.returncode}")
 
-    # Output should contain failure marker
+    # Output should contain failure marker (check both streams)
     result.check(
         "Output contains failure marker",
         "\u274c" in combined,
         repr(combined[:100]),
     )
 
-    # Should be 2-5 lines (terse but informative)
-    output_lines = [line for line in combined.strip().split("\n") if line.strip()]
+    # Should be 2-5 lines (terse but informative) - only count wrapper's own output
+    output_lines = [line for line in output.strip().split("\n") if line.strip()]
     result.check(
         "Output is terse (2-5 lines)",
         2 <= len(output_lines) <= 5,
